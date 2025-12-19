@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behala CollegeCS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .college-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .dept-name {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            background: #f8f9ff;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            min-height: calc(100vh - 300px);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page */
+        .hero {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        /* Search Page */
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            padding: 1rem 2rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #5568d3;
+        }
+
+        .search-results {
+            margin-top: 2rem;
+        }
+
+        .result-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .result-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Notes Page */
+        .notes-section {
+            margin-bottom: 2rem;
+        }
+
+        .year-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .year-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .year-tab:hover, .year-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .paper-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .paper-card h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .paper-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #5568d3;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="dept-name">Behala College (Autonomous)</div>
+            <div class="college-name">Department of computer Science</div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home" class="nav-link active" onclick="showPage('home')">Home</a></li>
+            <li><a href="#search" class="nav-link" onclick="showPage('search')">Search</a></li>
+            <li><a href="#notes" class="nav-link" onclick="showPage('notes')">Notes</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <h1>Welcome to Computer Science Department</h1>
+                <p>Excellence in Education, Innovation in Technology</p>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h3>📚 Quality Education</h3>
+                    <p>Comprehensive curriculum designed to build strong foundations in computer science and prepare students for the tech industry.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💻 Modern Labs</h3>
+                    <p>State-of-the-art computer laboratories equipped with latest software and hardware for hands-on learning experience.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>👨‍🏫 Expert Faculty</h3>
+                    <p>Experienced and dedicated faculty members committed to nurturing the next generation of tech professionals.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📖 Study Resources</h3>
+                    <p>Access to previous year question papers, notes, and study materials to help you excel in your examinations.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Page -->
+        <div id="search" class="page">
+            <h2>Search Question Papers</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by subject, year, or semester...">
+                    <button onclick="performSearch()">Search</button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </div>
+
+        <!-- Notes Page -->
+        <div id="notes" class="page">
+            <h2>Previous Year Question Papers</h2>
+            <div class="notes-section">
+                <div class="year-tabs">
+                    <button class="year-tab active" 
+onclick="filterYear('2025')">2025</button>
+                    <button class="year-tab"
+onclick="filterYear('2024')">2024</button>
+                    <button class="year-tab" onclick="filterYear('2023')">2023</button>
+                    <button class="year-tab" onclick="filterYear('2022')">2022</button>
+                    <button class="year-tab" onclick="filterYear('2021')">2021</button>
+                    <button class="year-tab" onclick="filterYear('2020')">2020</button>
+                    <button class="year-tab" onclick="filterYear('2019')">2019</button>
+                    <button class="year-tab" onclick="filterYear('all')">All Years</button>
+                </div>
+                <div id="papersContainer" class="papers-grid"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Behala College - Department of Computer Science. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // question papers data
+        const questionPapers = [
+            { id: 1, subject: "Data Structures", year: 2025, semester: "5th", type: "Mid-Sem" },
+            { id: 2, subject: "Algorithms", year: 2024, semester: "5th", type: "End-Sem" },
+            { id: 3, subject: "Database Management Systems", year: 2024, semester: "3rd", type: "End-Sem" },
+            { id: 4, subject: "Operating Systems", year: 2023, semester: "4th", type: "Mid-Sem" },
+            { id: 5, subject: "Computer Networks", year: 2023, semester: "6th", type: "End-Sem" },
+            { id: 6, subject: "Programming in C", year: 2023, semester: "1st", type: "End-Sem" },
+            { id: 7, subject: "Object Oriented Programming", year: 2022, semester: "2nd", type: "Mid-Sem" },
+            { id: 8, subject: "Web Technologies", year: 2022, semester: "5th", type: "End-Sem" },
+            { id: 9, subject: "Software Engineering", year: 2022, semester: "6th", type: "Mid-Sem" },
+            { id: 10, subject: "Machine Learning", year: 2021, semester: "7th", type: "End-Sem" },
+            { id: 11, subject: "Artificial Intelligence", year: 2021, semester: "7th", type: "Mid-Sem" },
+            { id: 12, subject: "Computer Architecture", year: 2021, semester: "3rd", type: "End-Sem" }
+        ];
+
+        let currentYear = '2025';
+        let allPapers = questionPapers;
+
+        // Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Add active class to clicked nav link
+            event.target.classList.add('active');
+
+            // Load papers if notes page
+            if (pageId === 'notes') {
+                displayPapers(currentYear);
+            }
+        }
+
+        // Display papers
+        function displayPapers(year) {
+            const container = document.getElementById('papersContainer');
+            let filteredPapers = year === 'all' ? allPapers : allPapers.filter(p => p.year.toString() === year);
+
+            if (filteredPapers.length === 0) {
+                container.innerHTML = '<div class="no-results">No question papers available for this year.</div>';
+                return;
+            }
+
+            container.innerHTML = filteredPapers.map(paper => `
+                <div class="paper-card">
+                    <h4>${paper.subject}</h4>
+                    <p>Year: ${paper.year} | Semester: ${paper.semester} | ${paper.type}</p>
+                    <a href="#" class="download-btn" onclick="downloadPaper(${paper.id}); return false;">Download PDF</a>
+                </div>
+            `).join('');
+        }
+
+        // Filter by year
+        function filterYear(year) {
+            currentYear = year;
+            
+            // Update active tab
+            document.querySelectorAll('.year-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            displayPapers(year);
+        }
+
+        // Search functionality
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+
+            if (!query) {
+                resultsContainer.innerHTML = '<div class="no-results">Please enter a search term.</div>';
+                return;
+            }
+
+            const results = allPapers.filter(paper => 
+                paper.subject.toLowerCase().includes(query) ||
+                paper.year.toString().includes(query) ||
+                paper.semester.toLowerCase().includes(query) ||
+                paper.type.toLowerCase().includes(query)
+            );
+
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<div class="no-results">No results found for your search.</div>';
+                return;
+            }
+
+            resultsContainer.innerHTML = results.map(paper => `
+                <div class="result-item">
+                    <h3>${paper.subject}</h3>
+                    <p>Year: ${paper.year} | Semester: ${paper.semester} | ${paper.type}</p>
+                    <a href="#" class="download-btn" onclick="downloadPaper(${paper.id}); return false;">Download PDF</a>
+                </div>
+            `).join('');
+        }
+
+        // Download paper 
+        function downloadPaper(id) {
+           const paper = allPapers.find(p => p.id === id);    
+            window.open(paper, "_blank");
+            alert(`Downloading: ${paper.subject} - ${paper.year} ${paper.type}`);
+        }
+
+        // Initialize
+        displayPapers(currentYear);
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>
